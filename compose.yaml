@@ -1,0 +1,26 @@
+services:
+  server-a:
+    build:
+      context: ./server-a/.
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    networks:
+      - node-app-network
+
+  server-b:
+    build:
+      context: ./server-b/.
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3001:3001
+    networks:
+      - node-app-network
+
+networks:
+  node-app-network:
+    driver: bridge
+
+
