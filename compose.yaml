@@ -1,7 +1,7 @@
 services:
-  server-a:
+  app-one:
     build:
-      context: ./server-a/.
+      context: ./app-one/.
     environment:
       NODE_ENV: production
     ports:
@@ -9,9 +9,9 @@ services:
     networks:
       - node-app-network
 
-  server-b:
+  app-two:
     build:
-      context: ./server-b/.
+      context: ./app-two/.
     environment:
       NODE_ENV: production
     ports:

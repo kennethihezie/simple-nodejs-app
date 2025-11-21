@@ -1,0 +1,23 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: my-app
+
+build:
+  artifacts:
+    - image: collins/app-one
+      context: app-one
+      docker:
+        dockerfile: Dockerfile
+
+    - image: collins/app-two
+      context: app-two
+      docker:
+        dockerfile: Dockerfile
+
+manifests:
+  rawYaml:
+    - ./infra/*
+deploy:
+  kubectl: {}
+  

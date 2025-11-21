@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployments
+metadata:
+  name: app-two
+  namespace: api
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-two
+  template:
+    metadata:
+      labels:
+        app: app-two
+    spec:
+      containers:
+        - name: app-two
+          image: collins/app-two
+          envFrom:
+            - configMapRef:
+                name: app-two-config
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-two-srv
+  namespace: api
+  labels:
+    app: app-two
+
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3001
+      targetPort: 3001
+  selector:
+    app: app-two

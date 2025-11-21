@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  labels:
+    app.kubernetes.io/name: app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: /app-one
+        backend:
+          service:
+            name: app-one-srv
+            port: 
+              number: 3000
+
+      - pathType: Prefix
+        path: /app-two
+        backend: 
+          service:
+            name: app-two-srv
+            port: 
+              number: 3001
